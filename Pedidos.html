@@ -1,0 +1,175 @@
+<html>
+    <link rel="stylesheet" type="text/css" href="estilos.css">
+<body>
+    <header>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=stoke|Lucida+Bright|liberation|Karla|Verdana|Ubuntu">
+        <div class="ender">
+            <address>
+                Rua da Olaria, 3ºpiso<br>
+                Tel: (21) 98811-2244<br>
+                <a href="mailto:contato@refrescape.com.br">contato@refrescape.com.br</a>
+            </address>
+        </div>
+        <div class="imgLogo">
+            <img src="imagens/RefrescaPeTopo.png"/>
+        </div>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="RefrescaPePisoFrio.html">Apresentação</a></li>
+            <li><a href="Porcelanatos.html">Porcelanatos</a></li>
+            <li><a href="Complementos.html">Complementos</a></li>
+            <li><a href="Pedidos.html">Pedidos</a></li>
+        </ul>
+    </nav>
+    <section>
+        <form class="Formbox" action="Pedidos2.html" method="GET">
+            <fieldset class="FSLinhaInteira">
+                <legend>Seleção de Produtos</legend>
+                <fieldset class="FSLinha">
+                    <legend>Pisos e Rodapés</legend>
+                    <select class="elemPosEsq" name="selectPorcelanatos" id="selectPorcelanatos">
+                        <option id="-----" value="0">-----</option>
+                        <optgroup label="Porcelanatos">Porcelanatos</optgroup>
+                        <option id="CimenticioBegePortinari" value="110">Cimentício Bege Portinari</option>
+                        <option id="DecoradoFioriDiLotusBiancogres" value="200">Decorado Fiori Di Lotus Biancogres</option>
+                        <option id="MarmorizadoBeigeLuxBiancogres" value="280">Marmorizado Beige Lux Biancogres</option>
+                        <option id="AmadeiradoNogueiraEliane" value="150">Amadeirado Nogueira Eliane</option>
+                        <optgroup label="Rodape">Rodapé</optgroup>
+                        <option id="LEV102BrancoSantaLuzia" value="78">LEV 102 Branco Santa Luzia</option>
+                        <option id="MdfMoldufama1002Nogueira" value="35">Mdf Moldufama 1002 Nogueira</option>
+                    </select>
+                    <div class="elemPosDir">
+                        <label for="metros" class=" ">Metros:</label>
+                        <input type="text" id="metros" name="metros" class="  InpBoxPeq">
+                        <label for="metros" class=" ">Caixas:</label>
+                        <input type="text" id="caixas" name="caixas" class="  InpBoxPeq" onchange="totalParcialPorcelanatos()">
+                    </div>
+                    <div class="elemPosEsq colperc60">
+                        <label for="TotalParcialPorcelanatos">Total Parcial R$:</label>
+                        <input type="text" id="TotalParcialPorcelanatos" name="TotalParcialPorcelanatos" class="  InpBoxMed" readonly>
+                    </div>
+                    <div class="elemPosDir colper40">
+                        <button type="button" class="botoes" name="btnIncPorcelanatos" onclick="incluirPorcelanatos()">Incluir Produto</button>
+                    </div>
+                </fieldset>
+                <div class="LinhaForm"></div>
+                <fieldset class="FSLinha">
+                    <legend>Complementos</legend>
+                    <select class="elemPosEsq" name="selectComplementos" id="selectComplementos">
+                        <option id="-----" value="0">-----</option>
+                        <option id="Espacador2mm300pecasStanders" value="50">Espaçador 2mm 300 peças Standers</option>
+                        <option id="ArgamassaBranca20kgAxton" value="40">Argamassa Branca 20kg Axton</option>
+                        <option id="RejunteMarfim1KgAxton" value="17">Rejunte Marfim 1 Kg Axton</option>
+                        <option id="ColaparaMoldura400gSantaLuzia" value="47">Cola para Moldura 400g Santa Luzia</option>
+                    </select>
+                    <div class="elemPosDir">
+                        <label for="quantidade" class=" ">Quantidade:</label>
+                        <input type="text" id="quantidade" name="quantidade" class="  InpBoxPeq" onchange="totalParcialComplementos()">
+                    </div>
+                    <div class="elemPosEsq colperc60">
+                        <label for="TotalParcialComplementos">Total Parcial R$:</label>
+                        <input type="text" id="TotalParcialComplementos" name="TotalParcialComplementos" class="  InpBoxMed" readonly>
+                    </div>
+                    <div class="elemPosDir colper40">
+                        <button type="button" class="botoes" name="btnIncComplementos" onclick="incluirComplementos()">Incluir Produto</button>
+                    </div>
+                </fieldset>
+                <div class="LinhaForm" id="boxPedidos"></div>
+                <textarea class="lisPedArea" readonly name="listaPed" id="listaPed"></textarea>
+                
+                <div class="LinhaForm"></div>
+                
+                <div class="elemPosEsq colperc60">
+                    <label for="valorTotal">Valor Total R$:</label>
+                    <input type="text" id="valorTotal" name="valorTotal" class="  InpBoxMed" readonly>
+                </div>
+                <div class="elemPosDir colper40">
+                    <button type="submit" class="botoes" name="btnContinuar">Continuar</button>
+                    <button type="button" class="botoes" name="btnLimpar" onclick="limparCampos()">Limpar</button>
+                </div>
+            </fieldset>
+        </form>    
+    </section>
+    <script>
+        function totalParcialPorcelanatos() {
+            var selectPorcelanatos = document.getElementById("selectPorcelanatos");
+            var valorSelecionado = parseInt(selectPorcelanatos.options[selectPorcelanatos.selectedIndex].value);
+            var caixas = parseInt(document.getElementById("caixas").value);
+            var metros = parseInt(document.getElementById("metros").value);
+            
+            if (!isNaN(valorSelecionado) && !isNaN(caixas) && !isNaN(metros)) {
+                var totalParcialPorcelanatos = valorSelecionado * caixas * metros;
+                document.getElementById("TotalParcialPorcelanatos").value = totalParcialPorcelanatos.toString();
+            } else {
+                document.getElementById("TotalParcialPorcelanatos").value = "";
+            }
+        }
+    
+        function totalParcialComplementos() {
+            var selectComplementos = document.getElementById("selectComplementos");
+            var valorSelecionado = parseInt(selectComplementos.options[selectComplementos.selectedIndex].value);
+            var quantidade = parseInt(document.getElementById("quantidade").value);
+            var totalParcialComplementos = valorSelecionado * quantidade;
+            document.getElementById("TotalParcialComplementos").value = totalParcialComplementos.toString();
+        }
+    
+        function incluirComplementos() {
+            var selectComplementos = document.getElementById("selectComplementos");
+            var quantidade = (document.getElementById("quantidade").value).toString() + "x ";
+            var textoSelecionado = quantidade + selectComplementos.options[selectComplementos.selectedIndex].text;
+            var listaPed = document.getElementById("listaPed");
+            listaPed.value += textoSelecionado + "\n";
+            somarComplementosValorTotal()
+            document.getElementById("quantidade").value = "";
+            document.getElementById("selectComplementos").selectedIndex = 0;
+            document.getElementById("TotalParcialComplementos").value = "";
+        }
+    
+        function incluirPorcelanatos() {
+            var selectPorcelanatos = document.getElementById("selectPorcelanatos");
+            var metros = (document.getElementById("metros").value).toString() + "m ";
+            var caixas = (document.getElementById("caixas").value).toString() + "cx ";
+            var textoSelecionado = metros + caixas + selectPorcelanatos.options[selectPorcelanatos.selectedIndex].text + "\n";
+            var listaPed = document.getElementById("listaPed");
+            listaPed.value += textoSelecionado;
+            somarPorcelanatosValorTotal();
+            document.getElementById("metros").value = "";
+            document.getElementById("caixas").value = "";
+            document.getElementById("selectPorcelanatos").selectedIndex = 0;
+            document.getElementById("TotalParcialPorcelanatos").value = "";
+        }
+    
+        function somarPorcelanatosValorTotal() {
+            var totalPorcelanatos = parseInt(document.getElementById("TotalParcialPorcelanatos").value);
+            var valorTotal = parseInt(document.getElementById("valorTotal").value) || 0;;
+            valorTotal = valorTotal + totalPorcelanatos;
+            document.getElementById("valorTotal").value = valorTotal.toString();
+        }
+
+        function somarComplementosValorTotal() {
+            var totalComplementos = parseInt(document.getElementById("TotalParcialComplementos").value);
+            var valorTotal = parseInt(document.getElementById("valorTotal").value) || 0;
+            valorTotal = valorTotal + totalComplementos;
+            document.getElementById("valorTotal").value = valorTotal.toString();
+        }
+    
+        function limparCampos() {
+            document.getElementById("metros").value = "";
+            document.getElementById("caixas").value = "";
+            document.getElementById("selectPorcelanatos").selectedIndex = 0;
+            document.getElementById("TotalParcialPorcelanatos").value = "";
+            document.getElementById("quantidade").value = "";
+            document.getElementById("selectComplementos").selectedIndex = 0;
+            document.getElementById("TotalParcialComplementos").value = "";
+            document.getElementById("listaPed").value = "";
+            document.getElementById("valorTotal").value = "";
+        }
+
+    </script>
+</body>
+</html>
+
+
+
+

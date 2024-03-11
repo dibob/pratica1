@@ -1,0 +1,164 @@
+<html>
+    <link rel="stylesheet" type="text/css" href="estilos.css">
+<body>
+    <header>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=stoke|Lucida+Bright|liberation|Karla|Verdana|Ubuntu">
+        <div class="ender">
+            <address>
+                Rua da Olaria, 3ºpiso<br>
+                Tel: (21) 98811-2244<br>
+                <a href="mailto:contato@refrescape.com.br">contato@refrescape.com.br</a>
+            </address>
+        </div>
+        <div class="imgLogo">
+            <img src="imagens/RefrescaPeTopo.png"/>
+        </div>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="RefrescaPePisoFrio.html">Apresentação</a></li>
+            <li><a href="Porcelanatos.html">Porcelanatos</a></li>
+            <li><a href="Complementos.html">Complementos</a></li>
+            <li><a href="Pedidos.html">Pedidos</a></li>
+        </ul>
+    </nav>
+    <section>
+        <form class="Formbox" action="Pedidos.html">
+            <fieldset class="FSLinhaInteira">
+                <legend>Identificação</legend>
+                <div class="LinhaForm">
+                    <label for="nome">Nome: </label>
+                    <input type="text" id="nome" name="nome" class="InpBoxGnd elemPosDir">
+                </div>
+                <div class="LinhaForm">
+                    <label for="email" class=" ">E-mail: </label>
+                    <input type="text" id="email" name="email" class="InpBoxGnd elemPosDir">
+                </div>
+                <div class="LinhaForm">
+                    <div class="colperc50">
+                        <label for="endereco" class=" ">Endereço: </label>
+                        <textarea id="endereco" name="endereco" class="InpEnder elemPosDir"></textarea>
+                    </div>
+                    <div class="colper40 elemPosDir">
+                        <fieldset class="FSDir">
+                            <legend>Gênero:</legend>
+                            <input type="radio" id="mas" name="genero" value="Mas">
+                            <label for="mas">Mas</label>
+                            <input type="radio" id="fem" name="genero" value="Fem">
+                            <label for="fem">Fem</label>
+                            <input type="radio" id="outro" name="genero" value="outro">
+                            <label for="outro">Outro</label>
+                        </fieldset>
+                    </div>
+                </div>
+
+                <div class="LinhaForm"></div>
+                <div class="LinhaForm"></div>
+
+                <div class="LinhaForm"> 
+                    <div class="colperc50">
+                        <div class="LinhaForm">
+                            <label for="telefone" class=" ">Telefone: </label>
+                            <input type="text" id="telefone" name="telefone" class="inpTelef elemPosDir">
+                        </div>
+                        <div class="LinhaForm">
+                            <label for="celular" class=" ">Celular: </label>
+                            <input type="text" id="celular" name="celular" class="inpTelef elemPosDir">
+                        </div>
+                    </div>
+                    <div class="colper40 elemPosDir">
+                        <fieldset class="FSDir">
+                            <legend>Nascimento:</legend>
+                            <input class="numDD" type="number" id="dianasc" name="dianasc">
+                            <label>/</label>
+                            <input class="numDD" type="number" id="mesnasc" name="mesnasc">
+                            <label>/</label>
+                            <input class="numQD" type="number" id="anonasc" name="anonasc">
+                        </fieldset>
+                    </div>
+                </div>
+
+                <div class="LinhaForm"></div>
+                
+
+            </fieldset>
+            <div class="LinhaForm"></div>
+            <fieldset class="FSLinhaInteira">
+                <legend>Pagamento</legend>
+                <fieldset class="FSEsq ">
+                    <legend>Cartão</legend>
+                        <div class="LinhaForm">
+                            <label>Bandeira:</label>
+                            <input type="radio" id="visa" name="bandeira" value="visa">
+                            <label for="visa">Visa</label>
+                            <input type="radio" id="master" name="bandeira" value="master">
+                            <label for="master">Master</label>
+                            <input type="radio" id="elo" name="bandeira" value="elo">
+                            <label for="elo">Elo</label>
+                        </div>
+                        <div class="LinhaForm">
+                            <label>Validade:</label>
+                            <input class="numDD" type="number" id="mesval" name="mesval">
+                            <label>/</label>
+                            <input class="numQD" type="number" id="anoval" name="anoval">
+                        </div>
+                        <div class="LinhaForm">
+                            <label>Número:</label>
+                            <input class="inpNCC" type="number" id="numcc" name="numcc">                        
+                        </div>
+                </fieldset>
+                <textarea name="listaPed" id="listaPed" class="listaCompras"></textarea>
+                <div class="LinhaForm colValTot"></div>
+                <div class="LinhaForm colValTot">
+                    <label for="valorTotal">Valor Total R$:</label>
+                    <input type="text" id="valorTotal" name="valorTotal" class="InpBoxMed">
+                </div>
+            </fieldset>
+            <div class="elemPosDir">
+                    <button type="button" class="botoes" name="btnEnviar" onclick="enviarPedido()">Enviar</button>
+                    <button type="submit" class="botoes" name="btnLimpar" onclick="limparCampos()">Limpar</button>
+            </div>
+            <div class="LinhaForm"></div><div class="LinhaForm"></div>
+        </form>    
+    </section>
+    <script>
+        function getParametroUrl(nomeParametro) {
+            var urlSearchParams = new URLSearchParams(window.location.search);
+            return urlSearchParams.get(nomeParametro);
+        }
+        var listaPed = getParametroUrl('listaPed');
+        document.getElementById('listaPed').value = listaPed;
+    
+        var valorTotal = getParametroUrl('valorTotal');
+        document.getElementById('valorTotal').value = valorTotal;
+        
+        function limparCampos() {
+            document.getElementById("nome").value = "";
+            document.getElementById("email").value = "";
+            document.getElementById("endereco").value = "";
+            document.getElementById("telefone").value = "";
+            document.getElementById("celular").value = "";
+            document.getElementById("dianasc").value = "";
+            document.getElementById("mesnasc").value = "";
+            document.getElementById("anonasc").value = "";
+            document.getElementById("mesval").value = "";
+            document.getElementById("anoval").value = "";
+            document.getElementById("numcc").value = "";
+            var bandeira = document.getElementsByName("bandeira");
+            for (var i = 0; i < bandeira.length; i++) {bandeira[i].checked = false;}
+            var genero = document.getElementsByName("genero");
+            for (var i = 0; i < genero.length; i++) {genero[i].checked = false;}
+        }
+
+        function enviarPedido() {
+        alert("O pedido foi enviado com sucesso!");
+        limparCampos();
+        document.getElementById("valorTotal").value = "";
+        document.getElementById("listaPed").value = "";
+        window.location.href = "Pedidos.html";
+
+    }
+    </script>    
+</body>
+</html>
+
